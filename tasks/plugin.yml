@@ -1,0 +1,5 @@
+- name: Obtaining a list of plugins
+  jenkins_script:
+    script: 'println(Jenkins.instance.pluginManager.plugins)'
+    user: admin
+    password: admin
