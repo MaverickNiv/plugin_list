@@ -1,13 +1,13 @@
 - name: Obtaining a list of plugins
   jenkins_script:
-    script: 'Jenkins.instance.pluginManager.plugins.sort { it.getDisplayName() }.each{plugin ->  println ("${plugin.getDisplayName()}: ${plugin.getVersion()}")}'
+    script: 'Jenkins.instance.pluginManager.plugins.sort { it.getDisplayName() }.each{plugin ->  println ("${plugin.getDisplayName()}: ${plugin.getVersion()},")}'
     user: {{ jenkins_admin_username }}
     password: {{ jenkins_admin_password }}
   register: plugin_list
  
 - name: Updating Jenkins Plugin List
   set_fact: 
-    jenkins_plugins = "[{% for plug in plugin_list.split(':') %}{{plug.split(':')}},{% endfor %}]"
+    jenkins_plugins = "[{% for plug in plugin_list.split(',') %}{{plug.split(':')}},{% endfor %}]"
     
     
   
